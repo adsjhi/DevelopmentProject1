@@ -1,44 +1,46 @@
 ---
-"$BOSH_CLI_ROOT_PASSWORD": 'Blu3M1x03'
-"$EXTERNAL_DNS": ['10.0.80.11','8.8.8.8']
-"$VMWARE_IPADDRESS": '10.120.138.23'
-"$VMWARE_USERNAME": 'root'
-"$VMWARE_PASSWORD": 'Tivoli4me'
-"$VMWARE_DATACENTER": 'dal09'
-"$VMWARE_CLUSTER": 'local-proxy-dev04'
-"$VMWARE_RESOURCE_POOL": 'bluemixdev04'
-"$VMWARE_PORTGROUP": 'Private Network - vmnic0 vmnic2'
+"$BOSH_CLI_ROOT_PASSWORD": Blu3M1x03
+"$EXTERNAL_DNS":
+- 10.0.80.11
+- 8.8.8.8
+"$VMWARE_IPADDRESS": 10.120.138.23
+"$VMWARE_USERNAME": root
+"$VMWARE_PASSWORD": Tivoli4me
+"$VMWARE_DATACENTER": dal09
+"$VMWARE_CLUSTER": local-proxy-dev04
+"$VMWARE_RESOURCE_POOL": bluemixdev04
+"$VMWARE_PORTGROUP": Private Network - vmnic0 vmnic2
 "$VMWARE_PORTGROUP_FOLDER": ''
-"$VMWARE_DATASTORE_PATTERN": 'local-dev04'
-"$DATAPOWER_VMWARE_PUBLIC_PORTGROUP": 'Private Network - vmnic0 vmnic2'
+"$VMWARE_DATASTORE_PATTERN": local-dev04
+"$DATAPOWER_VMWARE_PUBLIC_PORTGROUP": Private Network - vmnic0 vmnic2
 "$DATAPOWER_PUBLIC_IP": 10.142.90.101|10.142.90.102
-"$DATAPOWER_PUBLIC_NETMASK": '10.142.235.49'
-"$DATAPOWER_PUBLIC_GATEWAY": '255.255.255.240'
+"$DATAPOWER_PUBLIC_NETMASK": 10.142.235.49
+"$DATAPOWER_PUBLIC_GATEWAY": 255.255.255.240
 "$DATAPOWER_PUBLIC_VIP": 10.142.90.98|10.142.90.99|10.142.90.100
 "$SUBNET_THIRD_OCTET": '103'
-"$PROXY_HOST": '10.142.235.56'
+"$PROXY_HOST": 10.142.235.56
 "$PROXY_PORT": '3128'
-"$PROXY_USER": 'ibmadmin'
-"$PROXY_PASSWORD": 'Bluemix4me'
+"$PROXY_USER": ibmadmin
+"$PROXY_PASSWORD": Bluemix4me
 "$USERS_041": local
-"$ENV_NAME": 'Local-VMware-Dev04'
+"$ENV_NAME": Local-VMware-Dev04
 "$SHORT_NAME": loc_vmware_dev04
-"$UCD_AGENT_PRIMARY": 'local-dev04-inception01-20171023-1501'
-"$UCD_AGENT_SECONDARY": 'local-dev04-inception02-20171023-1425'
+"$UCD_AGENT_PRIMARY": local-dev04-inception01-20171023-1501
+"$UCD_AGENT_SECONDARY": local-dev04-inception02-20171023-1425
 "$BSS_SERVICE_LIST": Auto-Scaling-dedicated
-"$CERTS_PASSPHRASE": 'Pg3FUlbrSDwvv3L2'
-"$CLOUDANT_BROKER_DB": 'brokerdbdevfour'
-"$CLOUDANT_CLUSTER_NAME": 'bluemix-dal-ops001'
-"$MCCP_GEO": 'us-south'
-"$CUSTOMER_NAME": 'dev04'
-"$MCCP_ACCOUNT_GUID": '40df7d7e841701cbb8f4dafa8b9ed16c'
-"$MCCP_CUSTOMER_DISPLAY_NAME": 'Local Bluemix Development 04'
-"$BLUEMIX_ENV_DOMAIN": 'local.bluemix.net'
-"$BLUEMIX_APPS_DOMAIN": 'local.mybluemix.net'
-"$MONITOR_ORG_NAME": 'ibm'
-"$MONITOR_ENV_NAME": 'l_ys1'
+"$CERTS_PASSPHRASE": Pg3FUlbrSDwvv3L2
+"$CLOUDANT_BROKER_DB": brokerdbdevfour
+"$CLOUDANT_CLUSTER_NAME": bluemix-dal-ops001
+"$MCCP_GEO": us-south
+"$CUSTOMER_NAME": dev04
+"$MCCP_ACCOUNT_GUID": 40df7d7e841701cbb8f4dafa8b9ed16c
+"$MCCP_CUSTOMER_DISPLAY_NAME": Local Bluemix Development 04
+"$BLUEMIX_ENV_DOMAIN": local.bluemix.net
+"$BLUEMIX_APPS_DOMAIN": local.mybluemix.net
+"$MONITOR_ORG_NAME": ibm
+"$MONITOR_ENV_NAME": l_ys1
 "$DIEGO_CELLS": 4
-"$requested_by": ''
+"$requested_by": keshav.velhal@ibm.com
 default:
   ucd:
     env: "$ENV_NAME"
@@ -556,3 +558,4 @@ run:
       reconfigure_qradar_iem: false
 - slack:
     text: Script completed with success
+"$schedule_date": 2017-10-29 07:00
