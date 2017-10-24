@@ -1,0 +1,558 @@
+---
+"$BOSH_CLI_ROOT_PASSWORD": ''
+"$EXTERNAL_DNS": []
+"$VMWARE_IPADDRESS": ''
+"$VMWARE_USERNAME": ''
+"$VMWARE_PASSWORD": ''
+"$VMWARE_DATACENTER": ''
+"$VMWARE_CLUSTER": ''
+"$VMWARE_RESOURCE_POOL": ''
+"$VMWARE_PORTGROUP": ''
+"$VMWARE_PORTGROUP_FOLDER": ''
+"$VMWARE_DATASTORE_PATTERN": ''
+"$DATAPOWER_VMWARE_PUBLIC_PORTGROUP": ''
+"$DATAPOWER_PUBLIC_IP": CHANGE_ME|CHANGE_ME
+"$DATAPOWER_PUBLIC_NETMASK": ''
+"$DATAPOWER_PUBLIC_GATEWAY": ''
+"$DATAPOWER_PUBLIC_VIP": CHANGE_ME|CHANGE_ME|CHANGE_ME
+"$SUBNET_THIRD_OCTET": ''
+"$PROXY_HOST": ''
+"$PROXY_PORT": 3128
+"$PROXY_USER": ''
+"$PROXY_PASSWORD": ''
+"$USERS_041": local
+"$ENV_NAME": ''
+"$SHORT_NAME": dev04
+"$UCD_AGENT_PRIMARY": ''
+"$UCD_AGENT_SECONDARY": ''
+"$BSS_SERVICE_LIST": Auto-Scaling-dedicated
+"$CERTS_PASSPHRASE": ''
+"$CLOUDANT_BROKER_DB": ''
+"$CLOUDANT_CLUSTER_NAME": ''
+"$MCCP_GEO": ''
+"$CUSTOMER_NAME": ''
+"$MCCP_ACCOUNT_GUID": ''
+"$MCCP_CUSTOMER_DISPLAY_NAME": ''
+"$BLUEMIX_ENV_DOMAIN": ''
+"$BLUEMIX_APPS_DOMAIN": ''
+"$MONITOR_ORG_NAME": ''
+"$MONITOR_ENV_NAME": ''
+"$DIEGO_CELLS": 4
+"$requested_by": ''
+default:
+  ucd:
+    env: "$ENV_NAME"
+    snapshot: CHANGE ME
+    wait: true
+    onlyChanged: true
+    customer: "$SHORT_NAME"
+    requestor: "$requested_by"
+    gitIssue:
+      org: Bluemix-Deployment
+      repo: "$SHORT_NAME"
+      assignee: "$requested_by"
+  slack:
+    channel: "#"
+run:
+- ucd:
+    env: JML File Environment
+    label: A0520-Create-JML
+    proc: A0520
+    status: READY
+    snapshot: 
+    properties:
+      app_ps_account: "$SHORT_NAME"
+      app_ps_automation: vmware
+- ucd:
+    env: JML File Environment
+    label: A0720-Create-Environment
+    proc: A0720
+    status: READY
+    snapshot: 
+    properties:
+      short_name: "$SHORT_NAME"
+      env.name: "$ENV_NAME"
+- ucd:
+    env: JML File Environment
+    label: A0800-Init-Git
+    proc: A0800
+    status: READY
+    snapshot: 
+    properties:
+      app_ps_shortname: "$SHORT_NAME"
+      apps_ps_envtype: local
+      apps_ps_automation: vmware
+      apps_ps_bluemix_env_geo: "$MCCP_GEO"
+      apps_ps_data_center_name_backup: 
+      apps_ps_objectstorage_data_center_name: 
+      apps_ps_network_zone: shared
+      apps_ps_bluemix_customer_name: "$CUSTOMER_NAME"
+      apps_ps_ucd_env_name: "$ENV_NAME"
+      vmware_net_3rd_octet: "$SUBNET_THIRD_OCTET"
+      apps_ps_envsubtype: production
+      apps_ps_ad_dc_primary_ip: 10.124.116.124
+      apps_ps_ad_dc_secondary_ip: 10.124.116.119
+      apps_ps_bluemix_env_domain: "$BLUEMIX_ENV_DOMAIN"
+      apps_ps_bluemix_apps_domain: "$BLUEMIX_APPS_DOMAIN"
+      app_ps_additional_params: |
+        dea_next_instances: 0
+      os: ubuntu
+- ucd:
+    env: JML File Environment
+    label: A0208-Setting-Agents
+    proc: A0208
+    status: READY
+    snapshot: 
+    properties:
+      primary: "$UCD_AGENT_PRIMARY"
+      standby: "$UCD_AGENT_SECONDARY"
+      bluemixenv: "$ENV_NAME"
+- ucd:
+    label: A9122-Update-GemSource-First-Inception
+    proc: A9122
+    status: READY
+    properties:
+      gemServerURL: http://10.124.116.106:8808/
+      cleanupExistingGemSources: true
+- ucd:
+    label: A0210-Upload-SL-Tools-primary
+    proc: A0210
+    status: READY
+    properties:
+      runHVTest: false
+      runWhitelistTest: false
+      runSubnetTest: false
+      runLDAPTest: false
+      runDNSTest: false
+      runIPsecTest: false
+      inceptionvmtype: primary
+      os: ubuntu
+- ucd:
+    label: A0801-Update-JML
+    proc: A0801
+    status: READY
+    snapshot: 
+    properties:
+      host: "$PROXY_HOST"
+      port: "$PROXY_PORT"
+      user: "$PROXY_USER"
+      pwd: "$PROXY_PASSWORD"
+      vmware_ipaddress: "$VMWARE_IPADDRESS"
+      vmware_username: "$VMWARE_USERNAME"
+      vmware_password: "$VMWARE_PASSWORD"
+      vmware_datacenter: "$VMWARE_DATACENTER"
+      vmware_cluster: "$VMWARE_CLUSTER"
+      vmware_resource_pool: "$VMWARE_RESOURCE_POOL"
+      vmware_portgroup: "$VMWARE_PORTGROUP"
+      vmware_portgroup_folder: "$VMWARE_PORTGROUP_FOLDER"
+      vmware_datastore_pattern: "$VMWARE_DATASTORE_PATTERN"
+      datapower_vmware_public_portgroup: "$DATAPOWER_VMWARE_PUBLIC_PORTGROUP"
+      datapower_public_ip: "$DATAPOWER_PUBLIC_IP"
+      datapower_public_netmask: "$DATAPOWER_PUBLIC_NETMASK"
+      datapower_public_gateway: "$DATAPOWER_PUBLIC_GATEWAY"
+      datapower_public_vip: "$DATAPOWER_PUBLIC_VIP"
+      external_dns: "$EXTERNAL_DNS"
+      bosh_cli_root_password: "$BOSH_CLI_ROOT_PASSWORD"
+- ucd:
+    label: A1403-CFCLI-primary
+    proc: A1403
+    status: READY
+- ucd:
+    label: A0215-SSH-Tunnel-primary
+    proc: A0215
+    status: READY
+- ucd:
+    label: A0216-Doctor-Blink-primary
+    proc: A0216
+    status: READY
+- ucd:
+    label: A3100-IEM-Relay-primary
+    proc: A3100
+    status: READY
+- ucd:
+    env: JML File Environment
+    label: A0212-Switch-To-Second-Inception
+    proc: A0212
+    status: READY
+    properties:
+      bluemixenv: "$ENV_NAME"
+- ucd:
+    label: A9122-Update-GemSource-Second-Inception
+    proc: A9122
+    status: READY
+    properties:
+      gemServerURL: http://10.124.116.106:8808/
+      cleanupExistingGemSources: true
+- ucd:
+    label: A0210-Upload-SL-Tools-secondary
+    proc: A0210
+    status: READY
+    properties:
+      runHVTest: false
+      runWhitelistTest: false
+      runSubnetTest: false
+      runLDAPTest: false
+      runDNSTest: false
+      runIPsecTest: false
+      inceptionvmtype: standby
+      os: ubuntu
+- ucd:
+    label: A1403-CFCLI-secondary
+    proc: A1403
+    status: READY
+- ucd:
+    label: A0215-SSH-Tunnel-secondary
+    proc: A0215
+    status: READY
+    onlyChanged: false
+    properties:
+      re-install: true
+- ucd:
+    label: A0216-Doctor-Blink-secondary
+    proc: A0216
+    status: READY
+    onlyChanged: false
+- ucd:
+    env: JML File Environment
+    label: A0212-Switch-Back-To-First-Inception
+    proc: A0212
+    status: READY
+    properties:
+      bluemixenv: "$ENV_NAME"
+- ucd:
+    label: A0200-Download-Binaries-v235.18
+    proc: A0200
+    status: READY
+    properties:
+      releaseVersion: ibm-v235.18
+      stemcellVersion: 3312.8
+    wait: false
+- ucd:
+    label: A0210-Upload-SL-Tools-Check-Env
+    proc: A0210
+    status: READY
+    properties:
+      runHVTest: true
+      runWhitelistTest: false
+      runSubnetTest: false
+      runLDAPTest: false
+      runDNSTest: false
+      runIPsecTest: false
+      inceptionvmtype: primary
+      os: ubuntu
+- join:
+  - A0200-Download-Binaries-v235.18
+  - A0210-Upload-SL-Tools-Check-Env
+- ucd:
+    label: A1028-Add-Certs-JML
+    proc: A1028
+    status: READY
+    properties:
+      component_keys: all
+      Passphrase: "$CERTS_PASSPHRASE"
+- ucd:
+    label: A1078-Add-Monitor-JML
+    proc: A1078
+    status: READY
+    properties:
+      monitor_org_name: "$MONITOR_ORG_NAME"
+      monitor_env_name: "$MONITOR_ENV_NAME"
+- ucd:
+    label: A1406-IEM-Relay-JML
+    proc: A1406
+    status: READY
+- ucd:
+    label: A3400-Check-JML-Keys
+    proc: A3400
+    status: READY
+- ucd:
+    label: A1400-Update-BoshCLI
+    proc: A1400
+    status: READY
+- ucd:
+    label: A1401-Deploy-Director
+    proc: A1401
+    status: READY
+- ucd:
+    label: A9123-Enable-Spruce
+    proc: A9123
+    status: READY
+- ucd:
+    label: A1402-Deploy-CF
+    proc: A1402
+    status: READY
+    properties:
+      test_cf: false
+- ucd:
+    label: A2010-Diego-Generate-Manifest
+    proc: A2010
+    status: READY
+    env: JML File Environment
+    properties:
+      app_ps_shortname: "$SHORT_NAME"
+      app_ps_diegocells: "$DIEGO_CELLS"
+- ucd:
+    label: A1402-Deploy-CF-Diego
+    proc: A1402
+    status: READY
+    properties:
+      test_cf: false
+- ucd:
+    label: A2000-Deploy-Diego
+    proc: A2000
+    status: READY
+    properties:
+      DATACENTER: default
+      POD: 1
+      CheckBeforeDeployment: false
+- ucd:
+    label: T1403-CF-CLI-Diego-Enabler-Plugin
+    proc: T1403
+    status: READY
+- ucd:
+    label: A2600-Deploy-Doctor-Agent-primary
+    proc: A2600
+    status: READY
+- ucd:
+    env: JML File Environment
+    label: A0217-Doctor-Blink-FE
+    proc: A0217
+    status: READY
+    properties:
+      short_name: "$SHORT_NAME"
+      mode: Full
+- ucd:
+    env: JML File Environment
+    label: A0212-Switch-To-Second-Inception-4-2600
+    proc: A0212
+    status: READY
+    properties:
+      bluemixenv: "$ENV_NAME"
+- ucd:
+    label: A2600-Deploy-Doctor-Agent-secondary
+    proc: A2600
+    status: READY
+    onlyChanged: false
+- ucd:
+    env: JML File Environment
+    label: A0212-Switch-Back-To-First-Inception-4-2600
+    proc: A0212
+    status: READY
+    properties:
+      bluemixenv: "$ENV_NAME"
+- ucd:
+    label: A1035-Deploy-DP
+    proc: A1035
+    status: READY
+- ucd:
+    label: A2601-Update-Doctor-Agent-primary
+    proc: A2601
+    status: READY
+    onlyChanged: false
+- ucd:
+    env: JML File Environment
+    label: A0212-Switch-To-Second-Inception-4-2601
+    proc: A0212
+    status: READY
+    properties:
+      bluemixenv: "$ENV_NAME"
+- stop:
+    message: Verify director ip is on second inception in resolv.conf, if yes remove
+      this stop, and stop commented out above
+- ucd:
+    label: A2601-Update-Doctor-Agent-secondary
+    proc: A2601
+    status: READY
+    onlyChanged: false
+- ucd:
+    env: JML File Environment
+    label: A0212-Switch-Back-To-First-Inception-4-2601
+    proc: A0212
+    status: READY
+    properties:
+      bluemixenv: "$ENV_NAME"
+- ucd:
+    label: A1403-CFCLI-6.13.0-2
+    proc: A1403
+    status: READY
+    snapshot: 
+    components:
+      Bluemix - CF CLI: v6.13.0
+- ucd:
+    label: A1042-UAA-Users
+    proc: A1042
+    status: READY
+    properties:
+      app_users: "$USERS_041"
+      users_dry_run: false
+      reset_passwords: false
+      delete_users: false
+- ucd:
+    label: A1043-UAA-Clients
+    proc: A1043
+    status: READY
+    properties:
+      app_users: "$USERS_041"
+      users_dry_run: false
+- ucd:
+    label: A1044-UAA-Orgs
+    proc: A1044
+    status: READY
+    properties:
+      dedicatedAdminUIDirectory: "/var/releases/admin-ui"
+      dedicatedBuildPacksDirectory: "/var/releases/buildpacks"
+      dedicatedBinDirectory: "/var/releases/bin"
+      reset_passwords: false
+- ucd:
+    label: A2700-Deploy-Buildpacks
+    proc: A2700
+    status: READY
+- ucd:
+    label: A1045-Estado-MCCP
+    proc: A1045
+    status: READY
+    properties:
+      mccp_account_guid: "$MCCP_ACCOUNT_GUID"
+      mccp_customerDisplayName: "$MCCP_CUSTOMER_DISPLAY_NAME"
+- ucd:
+    label: A5101-UUADB-Replication
+    proc: A5101
+    status: READY
+    properties:
+      job: uaadb
+      configMode: CheckAndSetup
+      dedicatedAdminUIDirectory: "/var/releases/admin-ui"
+      dedicatedBinDirectory: "/var/releases/bin"
+      dedicatedBuildPacksDirectory: "/var/releases/buildpacks"
+- ucd:
+    label: A5101-CCDB-Replication
+    proc: A5101
+    status: READY
+    properties:
+      job: ccdb_ng
+      configMode: CheckAndSetup
+      dedicatedAdminUIDirectory: "/var/releases/admin-ui"
+      dedicatedBinDirectory: "/var/releases/bin"
+      dedicatedBuildPacksDirectory: "/var/releases/buildpacks"
+- ucd:
+    label: A5002-Director-Backup
+    proc: A5002
+    status: READY
+    properties:
+      dedicatedAdminUIDirectory: "/var/releases/admin-ui"
+      dedicatedBinDirectory: "/var/releases/bin"
+      dedicatedBuildPacksDirectory: "/var/releases/buildpacks"
+- stop:
+    message: Ask BSS team to update the JML for BSS deployment
+- ucd:
+    label: A0651-BSS_QRadar
+    proc: A0651
+    status: READY
+- ucd:
+    label: A1056-Deploy-BSS
+    proc: A1056
+    status: READY
+    properties:
+      bss_completion_notify: true
+      bss_syndicator_address: anhkhoa@us.ibm.com
+- ucd:
+    label: A1060 BSS Syndication
+    proc: A1060
+    status: READY
+    properties:
+      service_list: "$BSS_SERVICE_LIST"
+- ucd:
+    label: A1046-Deploy-ACEDB
+    proc: A1046
+    status: READY
+- ucd:
+    label: A1047-Deploy-ECaaS
+    proc: A1047
+    status: READY
+- ucd:
+    label: A1106-Create-CloudantBroker
+    proc: 'A1106: Deploy'
+    status: READY
+    properties:
+      bluemix.flow: INTERNAL
+      cloudant.broker.db: "$CLOUDANT_BROKER_DB"
+      cluster.name: "$CLOUDANT_CLUSTER_NAME"
+      appname.internal: cloudantbrokerSMB
+- stop:
+    message: Make sure that acedb pw are the same for db2 and ace
+- ucd:
+    label: A1403-CFCLI-6.20.0
+    proc: A1403
+    status: READY
+    snapshot: 
+    components:
+      Bluemix - CF CLI: v6.20.0
+- ucd:
+    label: A1700-Deploy-OpsConsole
+    proc: A1700
+    status: READY
+- ucd:
+    label: A1800-Deploy-Console-0
+    proc: A1800
+    status: READY
+- ucd:
+    label: A1801-Deploy-Console-1
+    proc: A1801
+    status: READY
+- ucd:
+    label: A1802-Deploy-Console-2
+    proc: A1802
+    status: READY
+- ucd:
+    label: A1803-Deploy-Console-3
+    proc: A1803
+    status: READY
+- ucd:
+    label: A1804-Deploy-Console-4
+    proc: A1804
+    status: READY
+- ucd:
+    label: A1072-Deploy-Monitor-Agent
+    proc: A1072
+    status: READY
+- ucd:
+    label: A1140-Install-Boilerplates
+    proc: A1140
+    status: READY
+- ucd:
+    label: A1250-RMU
+    proc: A1250
+    status: READY
+    properties:
+      deployment_mode: FULL
+      deploy_proxy: true
+      install_mode: UPGRADE
+- ucd:
+    label: A1403-CFCLI-6.23.1
+    proc: A1403
+    status: READY
+    snapshot: 
+    components:
+      Bluemix - CF CLI: v6.23.1
+- ucd:
+    label: A1181-AutoScaling
+    proc: 'A1181: Deploy Auto Scaling'
+    status: READY
+    properties:
+      additional.deployment.option: "-Dis.BlueGreen=true"
+- ucd:
+    label: A3020-Security
+    proc: 'A3020:'
+    status: READY
+    properties:
+      pool_size: 5
+      bosh_deployment_filter: all_vms
+      on_specified_ips: 
+      Documentation: https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/Wfba9e56cc40c_4bb2_8805_e05bdeb2105f/page/A3020%20-%20Deploy%20security-release%20hardening%20%28Public%2C%20Dedicated%2C%20Local%29
+      include_boshcli: true
+      include_director: true
+      include_2_boshcli: true
+      security-release_version: v0.1-38
+      reconfigure_qradar_iem: false
+- slack:
+    text: Script completed with success
