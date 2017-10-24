@@ -44,7 +44,7 @@
 default:
   ucd:
     env: "$ENV_NAME"
-    snapshot: "Local-Vmware-Dev04"
+    snapshot: Local-Vmware-Dev04
     wait: true
     onlyChanged: true
     customer: "$SHORT_NAME"
