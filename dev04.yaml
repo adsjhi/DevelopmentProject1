@@ -44,7 +44,7 @@
 default:
   ucd:
     env: "$ENV_NAME"
-    snapshot: CHANGE ME
+    snapshot: "Local-Vmware-Dev04"
     wait: true
     onlyChanged: true
     customer: "$SHORT_NAME"
@@ -54,7 +54,7 @@ default:
       repo: "$SHORT_NAME"
       assignee: "$requested_by"
   slack:
-    channel: "#"
+    channel: "#bmlb_dev04-ic"
 run:
 - ucd:
     env: JML File Environment
