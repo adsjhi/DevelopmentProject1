@@ -47,7 +47,7 @@ default:
     snapshot: Local-Vmware-Dev04
     wait: true
     onlyChanged: true
-    customer: "$SHORT_NAME"
+    customer: "$CUSTOMER_NAME"
     requestor: "$requested_by"
     gitIssue:
       org: Bluemix-Deployment
