@@ -75,15 +75,15 @@ run:
     properties:
       app_ps_account: "$SHORT_NAME"
       app_ps_automation: vmware
- - ucd:
-      env: JML File Environment
-      label: A0720-Create-Environment
-      proc: A0720
-      status: READY
-      snapshot:
-      properties:
-        short_name: $SHORT_NAME
-        env.name: $ENV_NAME
+- ucd:
+    env: JML File Environment
+    label: A0720-Create-Environment
+    proc: A0720
+    status: FAILED
+    snapshot: 
+    properties:
+      short_name: "$SHORT_NAME"
+      env.name: "$ENV_NAME"
 - ucd:
     env: JML File Environment
     label: A0800-Init-Git
