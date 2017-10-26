@@ -60,30 +60,30 @@ run:
     label: A0100 Initialize repositories
     proc: A0100
     env: JML File Environment
-    status: READY
+    status: SUCCEEDED
     properties:
       apps_ps_envtype: local
       apps_ps_network_zone: shared
       apps_ps_envsubtype: production
-      apps_ps_shortname: $SHORT_NAME
+      apps_ps_shortname: "$SHORT_NAME"
 - ucd:
     env: JML File Environment
     label: A0520-Create-JML
     proc: A0520
-    status: READY
+    status: SUCCEEDED
     snapshot: 
     properties:
       app_ps_account: "$SHORT_NAME"
       app_ps_automation: vmware
-- ucd:
-    env: JML File Environment
-    label: A0720-Create-Environment
-    proc: A0720
-    status: READY
-    snapshot: 
-    properties:
-      short_name: "$SHORT_NAME"
-      env.name: "$ENV_NAME"
+ - ucd:
+      env: JML File Environment
+      label: A0720-Create-Environment
+      proc: A0720
+      status: READY
+      snapshot:
+      properties:
+        short_name: $SHORT_NAME
+        env.name: $ENV_NAME
 - ucd:
     env: JML File Environment
     label: A0800-Init-Git
