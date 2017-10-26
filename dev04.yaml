@@ -70,7 +70,7 @@ run:
     env: JML File Environment
     label: A0520-Create-JML
     proc: A0520
-    status: FAILED
+    status: READY
     snapshot: 
     properties:
       app_ps_account: "$SHORT_NAME"
