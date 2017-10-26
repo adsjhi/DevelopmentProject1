@@ -558,4 +558,4 @@ run:
       reconfigure_qradar_iem: false
 - slack:
     text: Script completed with success
-"$schedule_date": 2017-10-30 07:00
+"$schedule_date": 2017-10-31 07:00
