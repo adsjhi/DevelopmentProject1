@@ -1,0 +1,136 @@
+Recipe to deploy a  Slave PowerDns Configuration to mitigate Single Point of Failure of Bosh Director
+
+Goal : Add a second instance of an internal DNS on the NFS wal server
+
+This change implements a secondary unbound instance on a virtual machine for redundancy to the BOSH director powerDNS. 
+It will remove the single point of failure of the BOSH director. 
+The redundancy decreases the likelihood of significant network problems due to issues with the BOSH director.
+
+
+Steps Followed :
+
+
+Cloud Foundry  version 253 is a prerequisite.
+
+1 > Modify unbound-enablement.yml -  ( Run T1448 : Adds PowerDns Configuration to Local Unbound )
+
+You to run the UCD process which will add the below changes to unbound-enablement.yml: `T1448 : Adds PowerDns Configuration to Local Unbound`
+
+The T1448 Process will add the following to unbound-enablement.yml
+
+a> Adds the version v0.2-24 to the  unbound releases
+
+  releases:
+- name: unbound
+  version: v0.2-24
+
+
+b> Changes the name of template from  unbound to unbound_server for nfs_WAL_server Job
+
+  - name: nfs_WAL_server
+  templates:
+  - (( prepend ))
+  - name: unbound_server
+    release: unbound
+
+c>  Adds properties to the  nfs_WAL_server Job
+
+    - name: nfs_WAL_server
+  templates:
+  - (( prepend ))
+  - name: unbound_server
+    release: unbound
+  properties:
+    unbound:
+      director:
+        ip: (( grab environment.director_ip ))
+        user: vcap
+        password: << add Bluemix vcap password  >>
+
+Note:  Bluemix Vcap Password  is added from the JML .
+
+
+Verify that UCD Process T1448 makes the changes described above .
+
+2 >  Modify environment.yml adding
+
+
+a) extract or note down the external_dns_ip from environment.yml
+
+example :
+external_dns:
+  - 192.168.144.3
+
+b> Modify stub-addr to stub-addrs and add the external_dns ip to *.bluemix.net domain
+
+unbound_stub_zones:
+  - name: *.bluemix.net
+    stub-addrs:
+    - <director ip>
+    - <external_dns ip>
+
+example:
+- name: local.bluemix.net
+    stub-addrs:
+    - 192.168.144.2
+    - 192.168.144.3
+
+c) Modify stub-addr to stub-addrs and add the external_dns ip to *.mybluemix.net domain
+
+
+unbound_stub_zones:
+     ...
+  - name: *.mybluemix.net
+    stub-addrs:
+    - <director ip>
+    - <external_dns ip>
+
+
+  example :
+
+   - name: local.mybluemix.net
+    stub-addrs:
+    - 192.168.144.2
+    - 192.168.144.3
+
+
+d) Modify stub-addr to stub-addrs and add the microbosh dns name ip to microbosh domain
+
+  Note : Extract the deployment-name from the JML .
+  unbound_stub_zones:
+  - name: local.bluemix.net
+    ...
+  - name: microbosh
+    stub-addrs:
+    -  - <director ip>
+    - name: 0.nfs-wal-server.default.<deployment-name>.microbosh
+      resolver: - <director ip>
+
+    example :
+    - name: microbosh
+    stub-addrs:
+    - 192.168.144.2
+    - name: 0.nfs-wal-server.default.dev06-local.microbosh
+      resolver: 192.168.144.2
+
+
+3> Add the nfs_wal_server IP to /etc/resolv.conf.
+ 
+a) extract the nfs_wal_server IP from the inception
+
+Run command on the Inception VM :
+bosh vms <deployment-name> | grep nfs_WAL_server | awk '{print $11}'
+
+example :
+bosh vms dev06-local | grep nfs_WAL_server | awk '{print $11}'
+192.168.144.108
+
+b) add nfs_wal_server IP to /etc/resolv.conf
+ 
+nameserver <nfs_wal_server IP>
+
+example:
+nameserver 192.168.144.108
+
+
+4> Run Process 1402 to Deploy Cloud Foundry .

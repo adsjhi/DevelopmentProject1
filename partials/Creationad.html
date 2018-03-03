@@ -1,6 +1,6 @@
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/paymentPage.css">
+<link rel="stylesheet" type="text/css" href="css/CreationAd.css">
 </head>
 <body>
 <div class="add-general-first-block" style="min-height: 60px;baground-size:1920px">
@@ -50,63 +50,54 @@
 <form id="create-add-form" >
     
     <div class="name-add-display" style="display:block;margin-bottom:10px;margin-left:3px;text-align: center;">
-       Payment for a Ad.
+       Create a Ad.
     </div>     
    
    <div class="name-add" style="display:block;margin-bottom:10px;margin-left:3px;">
         <table role="username" cellspacing="8">
         <tbody>
          <tr>
-             <td>Name</td>
+             <td>Ad Specific Details</td>
          </tr>
         <tr>
-                       <td>
-                         <input id="firstname" class="inputpayment" name="firstname" type=text placeholder="First Name"> 
-                       </td>
-                       <td>
-                          <input id="lastname" class="inputpayment" name="lastname"  type=text placeholder="Last Name"> 
+                        <td colspan="2">
+                         <input id="addtype" class="addtype" name="addtype"  type=text placeholder="Add Type"> 
                        </td>
         </tr>
-         <tr>
-             <td>Billing Address</td>
+
+        <tr>
+                       <td>
+                         <input id="size" class="inputsizecycle" name="size" type=text placeholder="size"> 
+                       </td>
+                       <td>
+                          <input id="duration" class="inputsizecycle" name="duration"  type=text placeholder="duration"> 
+                       </td>
+        </tr>
+
+        <tr>
+                       <td>
+                         <input id="country" class="country" name="country"  type=text placeholder="Display Country"> 
+                       </td>
+        </tr>
+        <tr>
+             <td>Ad design</td>
          </tr>
         <tr>
-                       <td colspan="2">
-                         <input id="streetaddress1" class="streetaddress" name="streetaddress1"  type=text placeholder="Street Address"> 
+                       <td >
+                         <input id="backgroundcolor" class="backgroundcolor" name="backgroundcolor"  type=text placeholder="background color">   
+                       </td>
+                       <td>
+                          <input id="backgroundshape" class="backgroundshape" name="backgroundshape"  type=text placeholder="Ad shape"> 
                        </td>
         </tr>
         <tr>
-                       <td>
-                         <input id="state" class="inputpayment" name="state" type=text placeholder="State"> 
+                       <td colspan="1.5">
+                         <input id="browse" class="browse" name="browse" tabindex=1 type=text placeholder="browse from folder"> 
                        </td>
                        <td>
-                          <input id="pincode" class="inputpayment" name="pincode"  type=text placeholder="pincode"> 
-                       </td>
-        </tr>
-        <tr>
-                       <td>
-                         <input id="country" class="country" name="country"  type=text placeholder="Country"> 
-                       </td>
-        </tr>
-        <tr>
-             <td>Card Details</td>
-         </tr>
-        <tr>
-                       <td>
-                         <input id="cardtype" class="cardtype" name="cardnumber"  type=text placeholder="CardType"> 
-                       </td>
-        </tr>
-        <tr>
-                       <td colspan="2">
-                         <input id="cardnumber" class="cardNumber" name="cardnumber"  type=text placeholder="Card Number"> 
-                       </td>
-        </tr>
-        <tr>
-                       <td>
-                         <input id="expirydate" class="inputpayment" name="expirydate" tabindex=1 type=text placeholder="Expiry Date"> 
-                       </td>
-                       <td>
-                          <input id="cvv" class="inputcvv" name="cvv"  type=text placeholder="cvv"> 
+                          <label id="addupload" class="adduploadbutton" for="addupload">
+                                  <input id="upload" value="upload" type="submit">
+                            </label>
                        </td>
         </tr>
         <tbody>

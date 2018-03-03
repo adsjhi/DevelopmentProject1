@@ -116,8 +116,8 @@ color: #cc0000;
 
 #create-account-form{
   margin-top: 50px;
-  margin-left: 400px;
-  margin-right: 400px;
+  margin-left: 450px;
+  margin-right: 450px;
 }
 
 #searchsubmit{
@@ -129,4 +129,5 @@ color: #cc0000;
 }
 #login{
   background-color: #20343E;
-  color: white;
+  color: white;  
+}  

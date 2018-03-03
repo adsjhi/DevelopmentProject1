@@ -1,9 +1,9 @@
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/paymentPage.css">
+<link rel="stylesheet" type="text/css" href="css/addCreationStory.css">
 </head>
 <body>
-<div class="add-general-first-block" style="min-height: 60px;baground-size:1920px">
+  <div class="add-general-first-block" style="min-height: 60px;baground-size:1920px">
      <div class="add-page-menu-block">
          <div class="symbol-logo" style="position: absolute; top: 2px; left: 3px; width: 240px;">
             <h1>
@@ -30,7 +30,7 @@
                        <td >
                          <a href="" style="color: white;font-size: 10px;">Profile</a> 
                        </td>
-                         <td class="signin-form-feild" colspan="2">
+                         <td class="signin-form-feild">
                          <a href="" style="color: white;font-size: 10px;">Create Ad/Story</a> 
                          </td>
                          <td>
@@ -50,72 +50,32 @@
 <form id="create-add-form" >
     
     <div class="name-add-display" style="display:block;margin-bottom:10px;margin-left:3px;text-align: center;">
-       Payment for a Ad.
+      Create a Ad or Ad Story
     </div>     
    
    <div class="name-add" style="display:block;margin-bottom:10px;margin-left:3px;">
-        <table role="username" cellspacing="8">
-        <tbody>
-         <tr>
-             <td>Name</td>
-         </tr>
-        <tr>
-                       <td>
-                         <input id="firstname" class="inputpayment" name="firstname" type=text placeholder="First Name"> 
-                       </td>
-                       <td>
-                          <input id="lastname" class="inputpayment" name="lastname"  type=text placeholder="Last Name"> 
-                       </td>
-        </tr>
-         <tr>
-             <td>Billing Address</td>
-         </tr>
-        <tr>
-                       <td colspan="2">
-                         <input id="streetaddress1" class="streetaddress" name="streetaddress1"  type=text placeholder="Street Address"> 
-                       </td>
-        </tr>
-        <tr>
-                       <td>
-                         <input id="state" class="inputpayment" name="state" type=text placeholder="State"> 
-                       </td>
-                       <td>
-                          <input id="pincode" class="inputpayment" name="pincode"  type=text placeholder="pincode"> 
-                       </td>
-        </tr>
-        <tr>
-                       <td>
-                         <input id="country" class="country" name="country"  type=text placeholder="Country"> 
-                       </td>
-        </tr>
-        <tr>
-             <td>Card Details</td>
-         </tr>
-        <tr>
-                       <td>
-                         <input id="cardtype" class="cardtype" name="cardnumber"  type=text placeholder="CardType"> 
-                       </td>
-        </tr>
-        <tr>
-                       <td colspan="2">
-                         <input id="cardnumber" class="cardNumber" name="cardnumber"  type=text placeholder="Card Number"> 
-                       </td>
-        </tr>
-        <tr>
-                       <td>
-                         <input id="expirydate" class="inputpayment" name="expirydate" tabindex=1 type=text placeholder="Expiry Date"> 
-                       </td>
-                       <td>
-                          <input id="cvv" class="inputcvv" name="cvv"  type=text placeholder="cvv"> 
-                       </td>
-        </tr>
-        <tbody>
-        </table>  
+        <input style="width:497px" id="name" class="inputaddname" name="name" type=name placeholder="Add/Story Name">
     </div>  
      
+    <div class="name-catogery" style="display:block;margin-bottom:10px;margin-left:3px;">
+        <input style="width:497px" id="email" class="inputlogin" name="email" tabindex=2 type=email placeholder="Catogeries">
+    </div> 
+     
+    <div class="name-company" style="display:block;margin-bottom:10px;margin-left:3px;">
+        <input style="width:497px" id="pass" class="inputlogin" name="password" tabindex=2 type=password placeholder="Company Name">
+    </div>  
+       
+      <div class="name-create-add" style="display:block;margin-bottom:10px;margin-left:1px;color:black;">  
+    	 <label class="radio-inline">
+     	 <input type="radio" name="optradio" style="color: black;">Ad
+  		  </label>
+		<label class="radio-inline">
+      	<input type="radio" name="optradio" style="color: black;"> Ad Story
+    	</label>  
+	</div> 
 	<div class="name-add-sumbit" style="display:block;margin-bottom:10px;margin-left:60px;">
 	    <label id="addButton" class="addcreatebutton" for="addcreate">
-                    <input id="addcreate" value="Submit" type="submit">
+                    <input id="addcreate" value="Create" type="submit">
          </label>
      </div>    
 </form>
@@ -130,4 +90,3 @@
   </div>
 </body>
 </html>
-
