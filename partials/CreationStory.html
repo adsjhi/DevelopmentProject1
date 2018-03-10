@@ -1,6 +1,6 @@
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/addCreationStory.css">
+<link rel="stylesheet" type="text/css" href="css/CreationStory.css">
 </head>
 <body>
   <div class="add-general-first-block" style="min-height: 60px;baground-size:1920px">
@@ -50,32 +50,62 @@
 <form id="create-add-form" >
     
     <div class="name-add-display" style="display:block;margin-bottom:10px;margin-left:3px;text-align: center;">
-      Create a Ad or Ad Story
+      Create a Ad Story
     </div>     
    
-   <div class="name-add" style="display:block;margin-bottom:10px;margin-left:3px;">
-        <input style="width:497px" id="name" class="inputaddname" name="name" type=name placeholder="Add/Story Name">
+   
+    <div class="name-add-text" style="display:block;margin-bottom:10px;margin-left:3px;text-align: center;">
+            <textarea name="message" rows="11" cols="60">Enter your Story Here!!!!</textarea>
+    </div>
+    
+    <div class="name-add" style="display:block;margin-bottom:10px;margin-left:3px;">
+        <table role="username" cellspacing="8">
+        <tbody>
+         <tr>
+             <td>Ad Story Details </td>
+         </tr>
+        <tr>
+                       <td colspan="2">
+                         <input id="addtype" class="addtype" name="addtype"  type=text placeholder="Story Type"> 
+                       </td> 
+        </tr>
+
+        <tr>
+                       <td colspan="2">
+                         <input id="country" class="country" name="country"  type=text placeholder="Display Country"> 
+                       </td>
+        </tr>
+        <tr>
+             <td>Story design</td>
+         </tr>
+        <tr>
+                       <td >
+                         <input id="backgroundcolor" class="backgroundcolor" name="backgroundcolor"  type=text placeholder="background color">   
+                       </td>
+                       <td>
+                          <input id="backgroundshape" class="backgroundshape" name="backgroundshape"  type=text placeholder="Story shape"> 
+                       </td>
+        </tr>
+        <tr>
+             <td>Insert Image or Vedio</td>
+         </tr>
+        <tr>
+                       <td colspan="1.5">
+                         <input id="browse" class="browse" name="browse" tabindex=1 type=text placeholder="browse from folder"> 
+                       </td>
+                       <td>
+                          <label id="addupload" class="adduploadbutton" for="addupload">
+                                  <input id="upload" value="upload" type="submit">
+                            </label>
+                       </td>
+        </tr>
+        <tbody>
+        </table>  
     </div>  
      
-    <div class="name-catogery" style="display:block;margin-bottom:10px;margin-left:3px;">
-        <input style="width:497px" id="email" class="inputlogin" name="email" tabindex=2 type=email placeholder="Catogeries">
-    </div> 
-     
-    <div class="name-company" style="display:block;margin-bottom:10px;margin-left:3px;">
-        <input style="width:497px" id="pass" class="inputlogin" name="password" tabindex=2 type=password placeholder="Company Name">
-    </div>  
-       
-      <div class="name-create-add" style="display:block;margin-bottom:10px;margin-left:1px;color:black;">  
-    	 <label class="radio-inline">
-     	 <input type="radio" name="optradio" style="color: black;">Ad
-  		  </label>
-		<label class="radio-inline">
-      	<input type="radio" name="optradio" style="color: black;"> Ad Story
-    	</label>  
-	</div> 
 	<div class="name-add-sumbit" style="display:block;margin-bottom:10px;margin-left:60px;">
 	    <label id="addButton" class="addcreatebutton" for="addcreate">
-                    <input id="addcreate" value="Create" type="submit">
+                    <input id="addcreate" value="Create Story" type="submit">
          </label>
      </div>    
 </form>
